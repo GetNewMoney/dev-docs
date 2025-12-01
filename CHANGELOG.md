@@ -11,7 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Coming Soon
 - Real-time bank integration for fiat deposit verification
-- Webhook notifications for transaction status updates
 - Additional blockchain network support (Ethereum, Polygon, Base, Optimism, Arbitrum, Celo, Stellar, Solana, Avalanche, BNB Chain)
 - Official JavaScript and Python SDKs
 
