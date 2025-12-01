@@ -260,6 +260,11 @@ Your account operates on a prepaid balance system:
 | Base Sepolia | `base_sepolia` | Base Testnet | Development |
 | Optimism | `optimism` | Optimism Mainnet | Production |
 | Arbitrum | `arbitrum` | Arbitrum Mainnet | Production |
+| Celo | `celo` | Celo Mainnet | Production |
+| Stellar | `stellar` | Stellar Network | Production |
+| Solana | `solana` | Solana Mainnet | Production |
+| Avalanche | `avalanche` | Avalanche C-Chain | Production |
+| BNB Chain | `bnb` | BNB Smart Chain | Production |
 
 ---
 

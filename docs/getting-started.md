@@ -224,7 +224,6 @@ Now that you've made your first successful mint:
 1. **[Read the API Reference](api-reference.md)** - Learn about all available options
 2. **[Understand Error Handling](errors.md)** - Handle edge cases gracefully
 3. **[View Code Examples](../examples/)** - Production-ready code samples
-4. **[Set Up Webhooks](webhooks.md)** - Get notified when transactions complete (coming soon)
 
 ---
 

@@ -53,6 +53,13 @@ https://brale-webhook-proxy.andre-426.workers.dev
 | Ethereum | Mainnet | Coming Soon |
 | Polygon | Mainnet | Coming Soon |
 | Base | Mainnet | Coming Soon |
+| Optimism | Mainnet | Coming Soon |
+| Arbitrum | Mainnet | Coming Soon |
+| Celo | Mainnet | Coming Soon |
+| Stellar | Mainnet | Coming Soon |
+| Solana | Mainnet | Coming Soon |
+| Avalanche | Mainnet | Coming Soon |
+| BNB Chain | Mainnet | Coming Soon |
 
 ## Getting Access
 
