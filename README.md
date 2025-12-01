@@ -165,7 +165,6 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 - [ ] Webhook notifications for transaction status
 - [ ] Multiple network support (Ethereum, Polygon, Base)
 - [ ] SDK libraries (JavaScript, Python)
-- [ ] Dashboard for account management
 
 ## Feature Requests & Bug Reports
 

@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Webhook notifications for transaction status updates
 - Additional blockchain network support (Ethereum mainnet, Polygon, Base)
 - Official JavaScript and Python SDKs
-- Dashboard for account management
 
 ---
 
