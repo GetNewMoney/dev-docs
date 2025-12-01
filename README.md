@@ -163,7 +163,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 - [ ] Check Balance endpoint (query balance without minting)
 - [ ] Real-time bank integration (fiat deposit verification)
 - [ ] Webhook notifications for transaction status
-- [ ] Multiple network support (Ethereum, Polygon, Base)
+- [ ] Multiple network support (Ethereum, Polygon, Base, Optimism, Arbitrum, Celo, Stellar, Solana, Avalanche, BNB Chain)
 - [ ] SDK libraries (JavaScript, Python)
 
 ## Feature Requests & Bug Reports
