@@ -345,7 +345,7 @@ async function requestWithBackoff(fn, maxRetries = 3) {
 ### 1. Check the `ok` Field
 
 ```javascript
-const response = await fetch('https://api.getnewmoney.io/mint', {
+const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ apiKey, amount, chain })
@@ -417,7 +417,7 @@ import requests
 def mint_with_retry(api_key, amount, chain, max_retries=3):
     for attempt in range(max_retries):
         response = requests.post(
-            'https://api.getnewmoney.io/mint',
+            'https://brale-webhook-proxy.andre-426.workers.dev',
             json={'apiKey': api_key, 'amount': amount, 'chain': chain}
         )
 

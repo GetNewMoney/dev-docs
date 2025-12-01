@@ -46,7 +46,7 @@ Include your API key in every request body:
 ### Example Request
 
 ```bash
-curl -X POST https://api.getnewmoney.io/mint \
+curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "abc123-xyz789-def456",

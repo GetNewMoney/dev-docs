@@ -26,7 +26,7 @@ def mint_tokens(api_key: str, amount: float, chain: str = 'sepolia') -> dict:
     Raises:
         Exception: If mint operation fails
     """
-    url = 'https://api.getnewmoney.io/mint'
+    url = 'https://brale-webhook-proxy.andre-426.workers.dev'
 
     payload = {
         'apiKey': api_key,
@@ -149,7 +149,7 @@ class NewMoneyClient:
     def __init__(
         self,
         api_key: str,
-        base_url: str = 'https://api.getnewmoney.io',
+        base_url: str = 'https://brale-webhook-proxy.andre-426.workers.dev',
         timeout: int = 30,
         max_retries: int = 3
     ):
@@ -191,16 +191,15 @@ class NewMoneyClient:
             'chain': chain.value if isinstance(chain, Chain) else chain
         }
 
-        return self._request('/mint', payload)
+        return self._request(payload)
 
     def _request(
         self,
-        endpoint: str,
         payload: dict,
         retries: int = 0
     ) -> MintResponse:
         """Make an API request with retry logic."""
-        url = f"{self.base_url}{endpoint}"
+        url = self.base_url
 
         try:
             response = self.session.post(
@@ -216,7 +215,7 @@ class NewMoneyClient:
                     retry_after = data.get('retryAfter', 2 ** retries)
                     print(f"Rate limited. Retrying in {retry_after}s...")
                     time.sleep(retry_after)
-                    return self._request(endpoint, payload, retries + 1)
+                    return self._request(payload, retries + 1)
                 raise RateLimitError(
                     "Rate limit exceeded",
                     retry_after=data.get('retryAfter', 60),
@@ -230,7 +229,7 @@ class NewMoneyClient:
                     wait_time = 2 ** retries
                     print(f"Server error. Retrying in {wait_time}s...")
                     time.sleep(wait_time)
-                    return self._request(endpoint, payload, retries + 1)
+                    return self._request(payload, retries + 1)
                 raise NewMoneyError(
                     "Server error",
                     status_code=response.status_code,
@@ -513,7 +512,7 @@ class AsyncNewMoneyClient:
     def __init__(
         self,
         api_key: str,
-        base_url: str = 'https://api.getnewmoney.io'
+        base_url: str = 'https://brale-webhook-proxy.andre-426.workers.dev'
     ):
         self.api_key = api_key
         self.base_url = base_url
@@ -537,7 +536,7 @@ class AsyncNewMoneyClient:
         }
 
         async with session.post(
-            f"{self.base_url}/mint",
+            self.base_url,
             json=payload
         ) as response:
             data = await response.json()
@@ -683,7 +682,7 @@ python-dotenv>=1.0.0
 
 ```
 NEWMONEY_API_KEY=your-api-key-here
-NEWMONEY_BASE_URL=https://api.getnewmoney.io
+NEWMONEY_BASE_URL=https://brale-webhook-proxy.andre-426.workers.dev
 ```
 
 ### Loading environment

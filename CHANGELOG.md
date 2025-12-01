@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial beta release of the New Money Minting API
-- Core minting endpoint (`POST /mint`)
+- Core minting endpoint (`POST /`)
 - API key authentication with SHA256 hashing
 - Prepaid balance system for transaction management
 - Rate limiting (10 requests per minute per IP)

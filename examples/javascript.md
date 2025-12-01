@@ -10,7 +10,7 @@ Complete JavaScript/Node.js examples for the New Money API.
 
 ```javascript
 async function mintTokens(apiKey, amount, chain = 'sepolia') {
-  const response = await fetch('https://api.getnewmoney.io/mint', {
+  const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -51,25 +51,25 @@ mintTokens('your-api-key', 100, 'sepolia')
 class NewMoneyClient {
   constructor(apiKey, options = {}) {
     this.apiKey = apiKey;
-    this.baseUrl = options.baseUrl || 'https://api.getnewmoney.io';
+    this.baseUrl = options.baseUrl || 'https://brale-webhook-proxy.andre-426.workers.dev';
     this.timeout = options.timeout || 30000;
     this.maxRetries = options.maxRetries || 3;
   }
 
   async mint(amount, chain = 'sepolia') {
-    return this._request('/mint', {
+    return this._request({
       apiKey: this.apiKey,
       amount: amount,
       chain: chain
     });
   }
 
-  async _request(endpoint, body, retries = 0) {
+  async _request(body, retries = 0) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
     try {
-      const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      const response = await fetch(this.baseUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -86,14 +86,14 @@ class NewMoneyClient {
         const retryAfter = data.retryAfter || Math.pow(2, retries);
         console.log(`Rate limited. Retrying in ${retryAfter}s...`);
         await this._sleep(retryAfter * 1000);
-        return this._request(endpoint, body, retries + 1);
+        return this._request(body, retries + 1);
       }
 
       // Handle server errors
       if (response.status >= 500 && retries < this.maxRetries) {
         console.log(`Server error. Retrying...`);
         await this._sleep(1000 * Math.pow(2, retries));
-        return this._request(endpoint, body, retries + 1);
+        return this._request(body, retries + 1);
       }
 
       // Handle client errors
@@ -178,7 +178,7 @@ app.post('/api/mint', async (req, res) => {
 
   try {
     // Call New Money API
-    const response = await fetch('https://api.getnewmoney.io/mint', {
+    const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -268,7 +268,7 @@ class NewMoneyClient {
 
   constructor(apiKey: string, options: NewMoneyClientOptions = {}) {
     this.apiKey = apiKey;
-    this.baseUrl = options.baseUrl || 'https://api.getnewmoney.io';
+    this.baseUrl = options.baseUrl || 'https://brale-webhook-proxy.andre-426.workers.dev';
     this.timeout = options.timeout || 30000;
     this.maxRetries = options.maxRetries || 3;
   }
@@ -283,7 +283,7 @@ class NewMoneyClient {
       chain
     };
 
-    const response = await fetch(`${this.baseUrl}/mint`, {
+    const response = await fetch(this.baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -404,7 +404,7 @@ class MintError extends Error {
 }
 
 async function mintWithErrorHandling(apiKey, amount, chain) {
-  const response = await fetch('https://api.getnewmoney.io/mint', {
+  const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ apiKey, amount, chain })
@@ -486,7 +486,7 @@ try {
 
 ```
 NEWMONEY_API_KEY=your-api-key-here
-NEWMONEY_BASE_URL=https://api.getnewmoney.io
+NEWMONEY_BASE_URL=https://brale-webhook-proxy.andre-426.workers.dev
 ```
 
 ### Config Module
@@ -498,7 +498,7 @@ require('dotenv').config();
 module.exports = {
   newMoney: {
     apiKey: process.env.NEWMONEY_API_KEY,
-    baseUrl: process.env.NEWMONEY_BASE_URL || 'https://api.getnewmoney.io',
+    baseUrl: process.env.NEWMONEY_BASE_URL || 'https://brale-webhook-proxy.andre-426.workers.dev',
     timeout: parseInt(process.env.NEWMONEY_TIMEOUT) || 30000
   }
 };

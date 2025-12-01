@@ -184,7 +184,7 @@ session = requests.Session()
 
 def mint(api_key, amount):
     return session.post(
-        'https://api.getnewmoney.io/mint',
+        'https://brale-webhook-proxy.andre-426.workers.dev',
         json={'apiKey': api_key, 'amount': amount}
     )
 ```

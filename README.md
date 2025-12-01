@@ -13,7 +13,6 @@
 New Money provides a simple API for minting NZD-backed stablecoins (dNZD1) on Ethereum networks. Our platform enables businesses to:
 
 - Mint stablecoins programmatically via API
-- Track transactions in real-time
 - Manage prepaid balances
 - Integrate with existing payment systems
 
@@ -33,7 +32,7 @@ New Money provides a simple API for minting NZD-backed stablecoins (dNZD1) on Et
 ### Base URL
 
 ```
-https://api.getnewmoney.io
+https://brale-webhook-proxy.andre-426.workers.dev
 ```
 
 ### Supported Operations
@@ -83,7 +82,7 @@ To get started with the API, you need to request test credentials:
 Once you have your API key, making a mint request is simple:
 
 ```bash
-curl -X POST https://api.getnewmoney.io/mint \
+curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key-here",

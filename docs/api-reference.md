@@ -2,7 +2,7 @@
 
 Complete reference documentation for the New Money Minting API.
 
-> **Base URL:** `https://api.getnewmoney.io`
+> **Base URL:** `https://brale-webhook-proxy.andre-426.workers.dev`
 >
 > **API Version:** 0.1.0-beta
 >
@@ -32,14 +32,16 @@ Authentication is performed via an API key included in the request body. See [Au
 
 > **Current Version:** Only the mint endpoint is available. A dedicated balance check endpoint is coming soon.
 
-### POST /mint
+### POST /
 
 Create a new mint order to receive dNZD1 stablecoins.
+
+> **Note:** All requests go to the root endpoint. There is no `/mint` path.
 
 #### Request
 
 ```http
-POST https://api.getnewmoney.io/mint
+POST https://brale-webhook-proxy.andre-426.workers.dev
 Content-Type: application/json
 
 {
@@ -134,7 +136,7 @@ See [Error Reference](errors.md) for complete error documentation.
 ### Minimal Request
 
 ```bash
-curl -X POST https://api.getnewmoney.io/mint \
+curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 50}'
 ```
@@ -142,7 +144,7 @@ curl -X POST https://api.getnewmoney.io/mint \
 ### Full Request with Chain
 
 ```bash
-curl -X POST https://api.getnewmoney.io/mint \
+curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key",
