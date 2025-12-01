@@ -75,7 +75,6 @@ To get started with the API, you need to request test credentials:
 ### Timeline
 
 - **Test account creation:** 1-2 business days
-- **KYB verification (for production):** 3-5 business days
 
 ## Quick Start Example
 
