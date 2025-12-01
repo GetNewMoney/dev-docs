@@ -41,9 +41,11 @@ https://api.getnewmoney.io
 | Operation | Description | Status |
 |-----------|-------------|--------|
 | Mint Tokens | Create new dNZD1 stablecoins | Available |
-| Check Balance | View remaining prepaid balance | Available |
-| Transaction Status | Track mint operation status | Available |
+| Check Balance | View remaining prepaid balance | Coming Soon |
+| Transaction Status | Track mint operation status | Coming Soon |
 | Bank Verification | Real-time fiat deposit check | Coming Soon |
+
+> **Note:** Balance and transaction status are returned in the mint response. Dedicated endpoints for querying these separately are coming soon.
 
 ### Supported Networks
 
@@ -161,6 +163,8 @@ curl -X POST https://api.getnewmoney.io/mint \
 
 ### Coming Soon
 
+- [ ] Check Balance endpoint (query balance without minting)
+- [ ] Transaction Status endpoint (track order by ID)
 - [ ] Real-time bank integration (fiat deposit verification)
 - [ ] Webhook notifications for transaction status
 - [ ] Multiple network support (Ethereum, Polygon, Base)

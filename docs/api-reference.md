@@ -30,6 +30,8 @@ Authentication is performed via an API key included in the request body. See [Au
 
 ## Endpoints
 
+> **Current Version:** Only the mint endpoint is available. Balance check and transaction status endpoints are coming soon.
+
 ### POST /mint
 
 Create a new mint order to receive dNZD1 stablecoins.
