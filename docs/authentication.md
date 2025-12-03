@@ -16,7 +16,7 @@ The New Money API uses **API key authentication**. Your API key is included in t
 
 ### Request Process
 
-1. **Email** [will@toroa.xyz](mailto:will@toroa.xyz) with your company details
+1. **Email** [tech@getnewmoney.io](mailto:tech@getnewmoney.io) with your company details
 2. **Receive** your API key within 1-2 business days
 3. **Store** the key securely (you'll only receive it once)
 
@@ -46,7 +46,7 @@ Include your API key in every request body:
 ### Example Request
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "abc123-xyz789-def456",
@@ -195,7 +195,7 @@ Your account can have one of these statuses:
 
 If you need to rotate your API key:
 
-1. **Contact** [will@toroa.xyz](mailto:will@toroa.xyz)
+1. **Contact** [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 2. **Request** a new API key
 3. **Update** your application with the new key
 4. **Confirm** the old key has been revoked
@@ -219,7 +219,7 @@ We recommend using separate API keys for:
 | Staging | Pre-production testing |
 | Production | Live transactions |
 
-Request additional keys by emailing [will@toroa.xyz](mailto:will@toroa.xyz).
+Request additional keys by emailing [tech@getnewmoney.io](mailto:tech@getnewmoney.io).
 
 ---
 

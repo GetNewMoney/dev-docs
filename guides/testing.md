@@ -23,7 +23,7 @@ The New Money API is currently available in a **development/beta environment**. 
 
 ### Request Process
 
-1. Email [will@toroa.xyz](mailto:will@toroa.xyz)
+1. Email [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 2. Include your company name and use case
 3. Receive credentials within 1-2 business days
 
@@ -43,7 +43,7 @@ The New Money API is currently available in a **development/beta environment**. 
 Test a basic successful mint operation:
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-test-api-key",
@@ -69,7 +69,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 Test authentication error handling:
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "invalid-key-123",
@@ -92,21 +92,21 @@ Test various validation scenarios:
 
 **Missing amount:**
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key"}'
 ```
 
 **Invalid amount type:**
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": "not-a-number"}'
 ```
 
 **Amount too high:**
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 15000}'
 ```
@@ -116,7 +116,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 Test balance checking:
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key",
@@ -141,7 +141,7 @@ Test rate limit handling by sending multiple rapid requests:
 ```bash
 for i in {1..15}; do
   echo "Request $i:"
-  curl -s -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+  curl -s -X POST https://dev-dnzd.newmoney-api.workers.dev \
     -H "Content-Type: application/json" \
     -d '{"apiKey":"your-api-key","amount":1}' | jq -r '.ok // .error'
 done
@@ -245,7 +245,7 @@ Use this checklist to verify your integration:
 ```javascript
 const assert = require('assert');
 
-const API_URL = 'https://brale-webhook-proxy.andre-426.workers.dev';
+const API_URL = 'https://dev-dnzd.newmoney-api.workers.dev';
 const API_KEY = process.env.NEWMONEY_API_KEY;
 
 async function testMint(payload) {
@@ -314,7 +314,7 @@ import os
 import requests
 import unittest
 
-API_URL = 'https://brale-webhook-proxy.andre-426.workers.dev'
+API_URL = 'https://dev-dnzd.newmoney-api.workers.dev'
 API_KEY = os.environ.get('NEWMONEY_API_KEY')
 
 

@@ -63,7 +63,7 @@ Or for validation errors:
 **Resolution:**
 - Double-check your API key
 - Request a new key if necessary
-- Contact [will@toroa.xyz](mailto:will@toroa.xyz)
+- Contact [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 
 ---
 
@@ -210,7 +210,7 @@ Or for validation errors:
 
 **Resolution:**
 - Request a smaller amount
-- Contact [will@toroa.xyz](mailto:will@toroa.xyz) to top up your balance
+- Contact [tech@getnewmoney.io](mailto:tech@getnewmoney.io) to top up your balance
 
 ---
 
@@ -265,7 +265,7 @@ Or for validation errors:
 - `suspended` - Account temporarily disabled
 - `inactive` - Account deactivated
 
-**Resolution:** Contact [will@toroa.xyz](mailto:will@toroa.xyz)
+**Resolution:** Contact [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 
 ---
 
@@ -345,7 +345,7 @@ async function requestWithBackoff(fn, maxRetries = 3) {
 ### 1. Check the `ok` Field
 
 ```javascript
-const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
+const response = await fetch('https://dev-dnzd.newmoney-api.workers.dev', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ apiKey, amount, chain })
@@ -417,7 +417,7 @@ import requests
 def mint_with_retry(api_key, amount, chain, max_retries=3):
     for attempt in range(max_retries):
         response = requests.post(
-            'https://brale-webhook-proxy.andre-426.workers.dev',
+            'https://dev-dnzd.newmoney-api.workers.dev',
             json={'apiKey': api_key, 'amount': amount, 'chain': chain}
         )
 
@@ -462,7 +462,7 @@ If you encounter persistent errors:
    - Error message and status code
    - Request details (without API key)
    - Steps to reproduce
-4. **Contact support** at [will@toroa.xyz](mailto:will@toroa.xyz) for account issues
+4. **Contact support** at [tech@getnewmoney.io](mailto:tech@getnewmoney.io) for account issues
 
 ---
 

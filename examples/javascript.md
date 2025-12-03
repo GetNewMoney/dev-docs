@@ -10,7 +10,7 @@ Complete JavaScript/Node.js examples for the New Money API.
 
 ```javascript
 async function mintTokens(apiKey, amount, chain = 'sepolia') {
-  const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
+  const response = await fetch('https://dev-dnzd.newmoney-api.workers.dev', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ mintTokens('your-api-key', 100, 'sepolia')
 class NewMoneyClient {
   constructor(apiKey, options = {}) {
     this.apiKey = apiKey;
-    this.baseUrl = options.baseUrl || 'https://brale-webhook-proxy.andre-426.workers.dev';
+    this.baseUrl = options.baseUrl || 'https://dev-dnzd.newmoney-api.workers.dev';
     this.timeout = options.timeout || 30000;
     this.maxRetries = options.maxRetries || 3;
   }
@@ -178,7 +178,7 @@ app.post('/api/mint', async (req, res) => {
 
   try {
     // Call New Money API
-    const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
+    const response = await fetch('https://dev-dnzd.newmoney-api.workers.dev', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -268,7 +268,7 @@ class NewMoneyClient {
 
   constructor(apiKey: string, options: NewMoneyClientOptions = {}) {
     this.apiKey = apiKey;
-    this.baseUrl = options.baseUrl || 'https://brale-webhook-proxy.andre-426.workers.dev';
+    this.baseUrl = options.baseUrl || 'https://dev-dnzd.newmoney-api.workers.dev';
     this.timeout = options.timeout || 30000;
     this.maxRetries = options.maxRetries || 3;
   }
@@ -404,7 +404,7 @@ class MintError extends Error {
 }
 
 async function mintWithErrorHandling(apiKey, amount, chain) {
-  const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
+  const response = await fetch('https://dev-dnzd.newmoney-api.workers.dev', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ apiKey, amount, chain })
@@ -486,7 +486,7 @@ try {
 
 ```
 NEWMONEY_API_KEY=your-api-key-here
-NEWMONEY_BASE_URL=https://brale-webhook-proxy.andre-426.workers.dev
+NEWMONEY_BASE_URL=https://dev-dnzd.newmoney-api.workers.dev
 ```
 
 ### Config Module
@@ -498,7 +498,7 @@ require('dotenv').config();
 module.exports = {
   newMoney: {
     apiKey: process.env.NEWMONEY_API_KEY,
-    baseUrl: process.env.NEWMONEY_BASE_URL || 'https://brale-webhook-proxy.andre-426.workers.dev',
+    baseUrl: process.env.NEWMONEY_BASE_URL || 'https://dev-dnzd.newmoney-api.workers.dev',
     timeout: parseInt(process.env.NEWMONEY_TIMEOUT) || 30000
   }
 };

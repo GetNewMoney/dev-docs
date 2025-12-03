@@ -3,7 +3,7 @@
 Get your first mint operation working in under 10 minutes.
 
 > **Prerequisites**
-> - API key from New Money (request at [will@toroa.xyz](mailto:will@toroa.xyz))
+> - API key from New Money (request at [tech@getnewmoney.io](mailto:tech@getnewmoney.io))
 > - Basic understanding of REST APIs
 > - cURL, Postman, or any HTTP client
 
@@ -15,7 +15,7 @@ Before you can use the API, you need to request test credentials.
 
 ### Email Template
 
-Send an email to **[will@toroa.xyz](mailto:will@toroa.xyz)** with the following information:
+Send an email to **[tech@getnewmoney.io](mailto:tech@getnewmoney.io)** with the following information:
 
 ```
 Subject: API Access Request - [Your Company Name]
@@ -52,7 +52,7 @@ Within 1-2 business days, you'll receive:
 All requests go to a single endpoint:
 
 ```
-POST https://brale-webhook-proxy.andre-426.workers.dev
+POST https://dev-dnzd.newmoney-api.workers.dev
 ```
 
 ### Request Format
@@ -80,7 +80,7 @@ POST https://brale-webhook-proxy.andre-426.workers.dev
 ### Using cURL
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key-here",
@@ -92,7 +92,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Using JavaScript (Node.js)
 
 ```javascript
-const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
+const response = await fetch('https://dev-dnzd.newmoney-api.workers.dev', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ console.log(data);
 import requests
 
 response = requests.post(
-    'https://brale-webhook-proxy.andre-426.workers.dev',
+    'https://dev-dnzd.newmoney-api.workers.dev',
     json={
         'apiKey': 'your-api-key-here',
         'amount': 10,
@@ -230,7 +230,7 @@ Now that you've made your first successful mint:
 ## Need Help?
 
 - **Technical Issues:** Create an issue on [GitHub](https://github.com/GetNewMoney/dev-docs/issues)
-- **Account Questions:** Email [will@toroa.xyz](mailto:will@toroa.xyz)
+- **Account Questions:** Email [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 
 ---
 

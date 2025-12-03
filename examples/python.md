@@ -26,7 +26,7 @@ def mint_tokens(api_key: str, amount: float, chain: str = 'sepolia') -> dict:
     Raises:
         Exception: If mint operation fails
     """
-    url = 'https://brale-webhook-proxy.andre-426.workers.dev'
+    url = 'https://dev-dnzd.newmoney-api.workers.dev'
 
     payload = {
         'apiKey': api_key,
@@ -149,7 +149,7 @@ class NewMoneyClient:
     def __init__(
         self,
         api_key: str,
-        base_url: str = 'https://brale-webhook-proxy.andre-426.workers.dev',
+        base_url: str = 'https://dev-dnzd.newmoney-api.workers.dev',
         timeout: int = 30,
         max_retries: int = 3
     ):
@@ -308,7 +308,7 @@ if __name__ == '__main__':
 
         except InsufficientBalanceError as e:
             print(f"Balance too low: {e}")
-            print("Contact will@toroa.xyz to top up.")
+            print("Contact tech@getnewmoney.io to top up.")
 
         except RateLimitError as e:
             print(f"Rate limited. Retry in {e.retry_after} seconds.")
@@ -512,7 +512,7 @@ class AsyncNewMoneyClient:
     def __init__(
         self,
         api_key: str,
-        base_url: str = 'https://brale-webhook-proxy.andre-426.workers.dev'
+        base_url: str = 'https://dev-dnzd.newmoney-api.workers.dev'
     ):
         self.api_key = api_key
         self.base_url = base_url
@@ -682,7 +682,7 @@ python-dotenv>=1.0.0
 
 ```
 NEWMONEY_API_KEY=your-api-key-here
-NEWMONEY_BASE_URL=https://brale-webhook-proxy.andre-426.workers.dev
+NEWMONEY_BASE_URL=https://dev-dnzd.newmoney-api.workers.dev
 ```
 
 ### Loading environment

@@ -2,7 +2,7 @@
 
 Complete reference documentation for the New Money Minting API.
 
-> **Base URL:** `https://brale-webhook-proxy.andre-426.workers.dev`
+> **Base URL:** `https://dev-dnzd.newmoney-api.workers.dev`
 >
 > **API Version:** 0.1.0-beta
 >
@@ -41,7 +41,7 @@ Create a new mint order to receive dNZD1 stablecoins.
 #### Request
 
 ```http
-POST https://brale-webhook-proxy.andre-426.workers.dev
+POST https://dev-dnzd.newmoney-api.workers.dev
 Content-Type: application/json
 
 {
@@ -136,7 +136,7 @@ See [Error Reference](errors.md) for complete error documentation.
 ### Minimal Request
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 50}'
 ```
@@ -144,7 +144,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Full Request with Chain
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key",

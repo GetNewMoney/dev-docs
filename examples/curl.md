@@ -9,7 +9,7 @@ Command-line examples for the New Money API using cURL.
 ### Base URL
 
 ```
-https://brale-webhook-proxy.andre-426.workers.dev
+https://dev-dnzd.newmoney-api.workers.dev
 ```
 
 ### Required Headers
@@ -25,7 +25,7 @@ Content-Type: application/json
 ### Mint Tokens (Minimal)
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key",
@@ -36,7 +36,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Mint Tokens (Full Request)
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key",
@@ -52,7 +52,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Successful Response
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 100}'
 ```
@@ -74,7 +74,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Invalid API Key
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "wrong-key", "amount": 100}'
 ```
@@ -90,7 +90,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Missing Amount
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key"}'
 ```
@@ -106,7 +106,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Insufficient Balance
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 50000}'
 ```
@@ -125,7 +125,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 
 ```bash
 # After making too many requests
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 10}'
 ```
@@ -152,7 +152,7 @@ export NEWMONEY_API_KEY="your-api-key"
 ### Use in Request
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d "{
     \"apiKey\": \"$NEWMONEY_API_KEY\",
@@ -168,7 +168,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Pretty Print Response
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 100}' | jq .
 ```
@@ -176,7 +176,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Show HTTP Headers
 
 ```bash
-curl -i -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -i -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 100}'
 ```
@@ -184,7 +184,7 @@ curl -i -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Verbose Output (Debug)
 
 ```bash
-curl -v -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -v -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 100}'
 ```
@@ -192,7 +192,7 @@ curl -v -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Silent Mode (No Progress)
 
 ```bash
-curl -s -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -s -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 100}'
 ```
@@ -201,7 +201,7 @@ curl -s -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 
 ```bash
 curl --connect-timeout 10 --max-time 30 \
-  -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+  -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 100}'
 ```
@@ -220,7 +220,7 @@ API_KEY="${NEWMONEY_API_KEY:-your-api-key}"
 AMOUNT="${1:-100}"
 CHAIN="${2:-sepolia}"
 
-curl -s -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -s -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d "{
     \"apiKey\": \"$API_KEY\",
@@ -258,7 +258,7 @@ if [ -z "$AMOUNT" ]; then
 fi
 
 # Make request
-RESPONSE=$(curl -s -w "\n%{http_code}" -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+RESPONSE=$(curl -s -w "\n%{http_code}" -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d "{
     \"apiKey\": \"$API_KEY\",
@@ -294,7 +294,7 @@ AMOUNTS=(10 20 30 40 50)
 for amount in "${AMOUNTS[@]}"; do
   echo "Minting $amount..."
 
-  RESPONSE=$(curl -s -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+  RESPONSE=$(curl -s -X POST https://dev-dnzd.newmoney-api.workers.dev \
     -H "Content-Type: application/json" \
     -d "{
       \"apiKey\": \"$API_KEY\",
@@ -319,7 +319,7 @@ echo "Done!"
 ### Test Valid Request
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key",
@@ -331,7 +331,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Test Invalid JSON
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d 'not valid json'
 ```
@@ -339,29 +339,29 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### Test Wrong Method
 
 ```bash
-curl -X GET https://brale-webhook-proxy.andre-426.workers.dev
+curl -X GET https://dev-dnzd.newmoney-api.workers.dev
 ```
 
 ### Test Amount Boundaries
 
 ```bash
 # Minimum (0.01)
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 0.01}'
 
 # Maximum (10000)
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 10000}'
 
 # Below minimum (should fail)
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 0.001}'
 
 # Above maximum (should fail)
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"apiKey": "your-api-key", "amount": 15000}'
 ```
@@ -372,7 +372,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 # Send 15 requests rapidly
 for i in {1..15}; do
   echo "Request $i:"
-  curl -s -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+  curl -s -X POST https://dev-dnzd.newmoney-api.workers.dev \
     -H "Content-Type: application/json" \
     -d '{"apiKey":"your-api-key","amount":1}' | jq -r '.ok // .error'
   echo ""

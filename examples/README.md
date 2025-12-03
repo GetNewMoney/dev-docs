@@ -19,7 +19,7 @@ Ready-to-use code examples for integrating with the New Money API.
 ### cURL (Simplest)
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key",
@@ -31,7 +31,7 @@ curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
 ### JavaScript
 
 ```javascript
-const response = await fetch('https://brale-webhook-proxy.andre-426.workers.dev', {
+const response = await fetch('https://dev-dnzd.newmoney-api.workers.dev', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -51,7 +51,7 @@ console.log(data);
 import requests
 
 response = requests.post(
-    'https://brale-webhook-proxy.andre-426.workers.dev',
+    'https://dev-dnzd.newmoney-api.workers.dev',
     json={
         'apiKey': 'your-api-key',
         'amount': 100,

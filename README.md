@@ -32,7 +32,7 @@ New Money provides a simple API for minting NZD-backed stablecoins (dNZD1) on Et
 ### Base URL
 
 ```
-https://brale-webhook-proxy.andre-426.workers.dev
+https://dev-dnzd.newmoney-api.workers.dev
 ```
 
 ### Supported Operations
@@ -67,7 +67,7 @@ https://brale-webhook-proxy.andre-426.workers.dev
 
 To get started with the API, you need to request test credentials:
 
-1. **Email us at:** [will@toroa.xyz](mailto:will@toroa.xyz)
+1. **Email us at:** [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 2. **Include in your email:**
    - Company name
    - Brief description of your use case
@@ -88,7 +88,7 @@ To get started with the API, you need to request test credentials:
 Once you have your API key, making a mint request is simple:
 
 ```bash
-curl -X POST https://brale-webhook-proxy.andre-426.workers.dev \
+curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "apiKey": "your-api-key-here",
@@ -189,7 +189,7 @@ When creating an issue, please include:
 
 | Channel | Purpose | Response Time |
 |---------|---------|---------------|
-| [will@toroa.xyz](mailto:will@toroa.xyz) | Account requests, general inquiries | 1-2 business days |
+| [tech@getnewmoney.io](mailto:tech@getnewmoney.io) | Account requests, general inquiries | 1-2 business days |
 | [GitHub Issues](https://github.com/GetNewMoney/dev-docs/issues) | Feature requests, bug reports | Reviewed weekly |
 
 ## License

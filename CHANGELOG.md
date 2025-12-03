@@ -70,7 +70,7 @@ When we deprecate features:
 1. **Announcement**: Posted in changelog and documentation
 2. **Notice Period**: Minimum 30 days before removal
 3. **Migration Guide**: Provided for all breaking changes
-4. **Support**: Available via [will@toroa.xyz](mailto:will@toroa.xyz)
+4. **Support**: Available via [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 
 ---
 
@@ -86,7 +86,7 @@ We appreciate your feedback during the beta period:
 
 - **Feature Requests**: [GitHub Issues](https://github.com/GetNewMoney/dev-docs/issues)
 - **Bug Reports**: [GitHub Issues](https://github.com/GetNewMoney/dev-docs/issues)
-- **General Feedback**: [will@toroa.xyz](mailto:will@toroa.xyz)
+- **General Feedback**: [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 
 ---
 
