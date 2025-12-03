@@ -86,8 +86,6 @@ Content-Type: application/json
 ```json
 {
   "ok": true,
-  "orderId": "355GwpVDbbIPwzBLofNFN8HfY1F",
-  "status": "pending",
   "user_name": "Your Company Name",
   "wallet_address": "0x6B4eCa48e033dd34C9cBab0bEbc708C2345b7BB5",
   "amount": 100,
@@ -101,8 +99,6 @@ Content-Type: application/json
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | `true` if the request was accepted |
-| `orderId` | string | Unique identifier for tracking this mint operation |
-| `status` | string | Current status: `pending`, `complete`, or `failed` |
 | `user_name` | string | Your registered account name |
 | `wallet_address` | string | Ethereum address where tokens will be minted |
 | `amount` | number | The amount that was requested |
@@ -158,8 +154,6 @@ curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
 ```json
 {
   "ok": true,
-  "orderId": "355GwpVDbbIPwzBLofNFN8HfY1F",
-  "status": "pending",
   "user_name": "Acme Corp",
   "wallet_address": "0x6B4eCa48e033dd34C9cBab0bEbc708C2345b7BB5",
   "amount": 100.50,
@@ -179,7 +173,6 @@ The API enforces rate limiting to ensure fair usage and system stability.
 | Limit Type | Value | Window |
 |------------|-------|--------|
 | Requests per IP | 10 | 1 minute |
-| Requests per API key | 100 | 1 hour |
 
 ### Rate Limit Response
 

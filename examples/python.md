@@ -39,7 +39,7 @@ def mint_tokens(api_key: str, amount: float, chain: str = 'sepolia') -> dict:
 
     if response.status_code == 200 and data.get('ok'):
         print(f"Mint successful!")
-        print(f"Order ID: {data.get('orderId')}")
+        print(f"Wallet: {data.get('wallet_address')}")
         print(f"Remaining balance: ${data.get('remaining_balance'):.2f}")
         return data
     else:
@@ -80,8 +80,6 @@ class Chain(Enum):
 @dataclass
 class MintResponse:
     ok: bool
-    order_id: Optional[str] = None
-    status: Optional[str] = None
     user_name: Optional[str] = None
     wallet_address: Optional[str] = None
     amount: Optional[float] = None
@@ -93,8 +91,6 @@ class MintResponse:
     def from_dict(cls, data: Dict[str, Any]) -> 'MintResponse':
         return cls(
             ok=data.get('ok', False),
-            order_id=data.get('orderId'),
-            status=data.get('status'),
             user_name=data.get('user_name'),
             wallet_address=data.get('wallet_address'),
             amount=data.get('amount'),
@@ -297,8 +293,6 @@ if __name__ == '__main__':
         try:
             result = client.mint(100, Chain.SEPOLIA)
             print(f"Mint successful!")
-            print(f"Order ID: {result.order_id}")
-            print(f"Status: {result.status}")
             print(f"Wallet: {result.wallet_address}")
             print(f"Amount: ${result.amount:.2f}")
             print(f"Remaining: ${result.remaining_balance:.2f}")
@@ -380,8 +374,6 @@ def mint_endpoint():
 
         return jsonify({
             'success': True,
-            'orderId': result.order_id,
-            'status': result.status,
             'amount': result.amount,
             'walletAddress': result.wallet_address
         })
@@ -463,9 +455,8 @@ class MintView(View):
 
             return JsonResponse({
                 'success': True,
-                'orderId': result.order_id,
-                'status': result.status,
-                'amount': result.amount
+                'amount': result.amount,
+                'walletAddress': result.wallet_address
             })
 
         except InsufficientBalanceError:
@@ -566,7 +557,7 @@ async def main():
     async with AsyncNewMoneyClient('your-api-key') as client:
         # Single request
         result = await client.mint(100, 'sepolia')
-        print(f"Order ID: {result['orderId']}")
+        print(f"Wallet: {result['wallet_address']}")
 
         # Multiple concurrent requests
         tasks = [
@@ -580,7 +571,7 @@ async def main():
             if isinstance(result, Exception):
                 print(f"Request {i+1} failed: {result}")
             else:
-                print(f"Request {i+1} success: {result['orderId']}")
+                print(f"Request {i+1} success: {result['wallet_address']}")
 
 
 if __name__ == '__main__':
@@ -612,10 +603,11 @@ class TestNewMoneyClient:
         mock.status_code = 200
         mock.json.return_value = {
             'ok': True,
-            'orderId': 'test-order-123',
-            'status': 'pending',
+            'user_name': 'Test User',
+            'wallet_address': '0x6B4eCa48e033dd34C9cBab0bEbc708C2345b7BB5',
             'amount': 100,
-            'remaining_balance': 4900
+            'remaining_balance': 4900,
+            'message': 'Mint operation initiated successfully'
         }
         return mock
 
@@ -624,7 +616,7 @@ class TestNewMoneyClient:
             result = client.mint(100, Chain.SEPOLIA)
 
             assert result.ok is True
-            assert result.order_id == 'test-order-123'
+            assert result.wallet_address == '0x6B4eCa48e033dd34C9cBab0bEbc708C2345b7BB5'
             assert result.amount == 100
 
     def test_mint_auth_error(self, client):

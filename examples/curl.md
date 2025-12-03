@@ -61,8 +61,6 @@ curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
 ```json
 {
   "ok": true,
-  "orderId": "355GwpVDbbIPwzBLofNFN8HfY1F",
-  "status": "pending",
   "user_name": "Your Company",
   "wallet_address": "0x6B4eCa48e033dd34C9cBab0bEbc708C2345b7BB5",
   "amount": 100,
@@ -302,8 +300,8 @@ for amount in "${AMOUNTS[@]}"; do
       \"chain\": \"$CHAIN\"
     }")
 
-  ORDER_ID=$(echo "$RESPONSE" | jq -r '.orderId // "FAILED"')
-  echo "  Order ID: $ORDER_ID"
+  WALLET=$(echo "$RESPONSE" | jq -r '.wallet_address // "FAILED"')
+  echo "  Wallet: $WALLET"
 
   # Rate limit protection - wait between requests
   sleep 6

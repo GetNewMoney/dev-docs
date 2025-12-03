@@ -26,7 +26,7 @@ async function mintTokens(apiKey, amount, chain = 'sepolia') {
 
   if (response.ok && data.ok) {
     console.log('Mint successful!');
-    console.log('Order ID:', data.orderId);
+    console.log('Wallet:', data.wallet_address);
     console.log('Remaining balance:', data.remaining_balance);
     return data;
   } else {
@@ -136,7 +136,6 @@ async function main() {
   try {
     const result = await client.mint(100, 'sepolia');
     console.log('Mint successful!');
-    console.log('Order ID:', result.orderId);
     console.log('Wallet:', result.wallet_address);
     console.log('Balance:', result.remaining_balance);
   } catch (error) {
@@ -196,7 +195,7 @@ app.post('/api/mint', async (req, res) => {
       // Success - return relevant data to frontend
       res.json({
         success: true,
-        orderId: data.orderId,
+        
         amount: data.amount,
         status: data.status
       });
@@ -243,8 +242,6 @@ interface MintRequest {
 
 interface MintResponse {
   ok: boolean;
-  orderId?: string;
-  status?: 'pending' | 'complete' | 'failed';
   user_name?: string;
   wallet_address?: string;
   amount?: number;
@@ -381,7 +378,7 @@ function MintButton() {
         {loading ? 'Minting...' : 'Mint 100 dNZD1'}
       </button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {result && <p>Order ID: {result.orderId}</p>}
+      {result && <p>Wallet: {result.wallet_address}</p>}
     </div>
   );
 }

@@ -134,8 +134,6 @@ print(response.json())
 ```json
 {
   "ok": true,
-  "orderId": "355GwpVDbbIPwzBLofNFN8HfY1F",
-  "status": "pending",
   "user_name": "Your Company",
   "wallet_address": "0x6B4eCa48e033dd34C9cBab0bEbc708C2345b7BB5",
   "amount": 10,
@@ -149,8 +147,6 @@ print(response.json())
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | `true` if request was successful |
-| `orderId` | string | Unique identifier for this mint operation |
-| `status` | string | Current status: `pending`, `complete`, `failed` |
 | `user_name` | string | Your registered company name |
 | `wallet_address` | string | Destination wallet for minted tokens |
 | `amount` | number | Amount that was minted |

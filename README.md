@@ -101,8 +101,7 @@ curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
 ```json
 {
   "ok": true,
-  "orderId": "355GwpVDbbIPwzBLofNFN8HfY1F",
-  "status": "pending",
+  "user_name": "Your Company",
   "wallet_address": "0x6B4eCa48e033dd34C9cBab0bEbc708C2345b7BB5",
   "amount": 100,
   "remaining_balance": 4900,

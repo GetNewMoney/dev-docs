@@ -256,7 +256,7 @@ function logResponse(response) {
   console.log({
     timestamp: new Date().toISOString(),
     status: response.status,
-    orderId: response.orderId,
+    wallet_address: response.wallet_address,
     success: response.ok
   });
 }

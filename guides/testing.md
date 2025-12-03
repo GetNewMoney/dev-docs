@@ -56,8 +56,6 @@ curl -X POST https://dev-dnzd.newmoney-api.workers.dev \
 ```json
 {
   "ok": true,
-  "orderId": "355GwpVDbbIPwzBLofNFN8HfY1F",
-  "status": "pending",
   "wallet_address": "0x...",
   "amount": 10,
   "remaining_balance": 4990
@@ -270,7 +268,7 @@ async function testValidMint() {
 
   assert.strictEqual(status, 200);
   assert.strictEqual(data.ok, true);
-  assert.ok(data.orderId);
+  assert.ok(data.wallet_address);
   console.log('✓ Valid mint test passed');
 }
 
@@ -329,7 +327,7 @@ class TestNewMoneyAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertTrue(data.get('ok'))
-        self.assertIn('orderId', data)
+        self.assertIn('wallet_address', data)
 
     def test_invalid_api_key(self):
         response = requests.post(API_URL, json={

@@ -255,15 +255,14 @@ Or for validation errors:
 ```json
 {
   "ok": false,
-  "error": "User account is not active",
-  "status": "suspended"
+  "error": "User account is not active"
 }
 ```
 
-**Possible statuses:**
-- `pending` - Account setup in progress
-- `suspended` - Account temporarily disabled
-- `inactive` - Account deactivated
+**Possible causes:**
+- Account setup in progress
+- Account temporarily suspended
+- Account deactivated
 
 **Resolution:** Contact [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
 
@@ -357,7 +356,7 @@ if (!response.ok || !data.ok) {
   console.error('Error:', data.error || data.details);
   // Handle error
 } else {
-  console.log('Success:', data.orderId);
+  console.log('Success:', data.wallet_address);
   // Handle success
 }
 ```

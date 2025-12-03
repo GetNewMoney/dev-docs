@@ -228,7 +228,7 @@ Request additional keys by emailing [tech@getnewmoney.io](mailto:tech@getnewmone
 | Limit | Value |
 |-------|-------|
 | Requests per minute | 10 (per IP) |
-| Requests per hour | 100 (per API key) |
+|  |
 
 Exceeding these limits returns `429 Too Many Requests`.
 
