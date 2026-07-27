@@ -1,0 +1,190 @@
+openapi: 3.1.0
+info:
+  title: New Money DNZD DEV API
+  version: 0.2.0-dev
+  description: |
+    Creates a DNZD mint request and returns NZD bank-deposit instructions.
+    Minting is asynchronous and occurs only after payment reconciliation.
+    The current DEV contract supplies the issued API key in the JSON request
+    body. A standard header-based security scheme is planned for production.
+  contact:
+    email: tech@getnewmoney.io
+  license:
+    name: Proprietary
+    identifier: LicenseRef-Proprietary
+servers:
+  - url: https://devv2-dnzd.newmoney-api.workers.dev
+    description: DEV v2
+paths:
+  /:
+    post:
+      security: []
+      operationId: createMintRequest
+      summary: Create a mint request
+      description: Records a pending request and returns a unique payment reference.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMintRequest"
+            examples:
+              baseSepolia:
+                value:
+                  apiKey: replace-with-issued-dev-key
+                  amount: 10
+                  chain: base_sepolia
+      responses:
+        "201":
+          description: Mint request created and awaiting NZD payment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateMintRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+components:
+  schemas:
+    CreateMintRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - apiKey
+        - amount
+        - chain
+      properties:
+        apiKey:
+          type: string
+          minLength: 10
+          maxLength: 100
+          pattern: "^[A-Za-z0-9_-]+$"
+          description: Issued DEV API key. Keep it server-side.
+        amount:
+          type: number
+          minimum: 0.01
+          multipleOf: 0.01
+          description: Exact NZD amount to deposit and mint.
+        chain:
+          type: string
+          enum:
+            - base_sepolia
+    CreateMintRequestResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - ok
+        - status
+        - orderId
+        - amount
+        - currency
+        - chain
+        - brale_address_id
+        - payment
+        - message
+      properties:
+        ok:
+          type: boolean
+          const: true
+        status:
+          type: string
+          const: pending_payment
+        orderId:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+          const: NZD
+        chain:
+          type: string
+          const: base_sepolia
+        brale_address_id:
+          type: string
+          description: Registered DEV destination identifier.
+        payment:
+          $ref: "#/components/schemas/PaymentInstructions"
+        message:
+          type: string
+    PaymentInstructions:
+      type: object
+      additionalProperties: false
+      required:
+        - bank_name
+        - account_name
+        - account_number
+        - reference
+        - expires_at
+      properties:
+        bank_name:
+          type: string
+        account_name:
+          type: string
+        account_number:
+          type: string
+        reference:
+          type: string
+          maxLength: 12
+        expires_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          const: false
+        error:
+          type: string
+      required:
+        - error
+  responses:
+    BadRequest:
+      description: Invalid request or assigned limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: Invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Forbidden:
+      description: Partner account inactive or not permitted
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    RateLimited:
+      description: Rate limit or overlapping request
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    ServerError:
+      description: Internal processing error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    ServiceUnavailable:
+      description: Service configuration unavailable
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
