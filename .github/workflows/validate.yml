@@ -17,5 +17,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install --requirement requirements-docs.txt
       - run: node scripts/validate-docs.mjs
+      - run: node scripts/prepare-site.mjs
+      - run: mkdocs build --site-dir "${{ runner.temp }}/site"
+      - run: node scripts/build-reference.mjs "${{ runner.temp }}/site"
       - run: npx --yes @redocly/cli@2.40.0 lint reference/openapi.yaml

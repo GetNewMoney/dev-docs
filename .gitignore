@@ -13,6 +13,8 @@ __pycache__/
 .idea/
 .claude/
 .codex/
+.site/
+.site-source/
 *.swp
 *.swo
 *~

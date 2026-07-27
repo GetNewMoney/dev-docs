@@ -4,6 +4,11 @@ Public documentation for integrating with the New Money DNZD development API.
 
 > DEV v2 beta: the API and lifecycle may change before production. The current environment uses Base Sepolia and test credentials only.
 
+## Developer portal
+
+- [Documentation](https://getnewmoney.github.io/dev-docs/docs/)
+- [API reference](https://getnewmoney.github.io/dev-docs/reference/)
+
 ## Start here
 
 | Section | Purpose |

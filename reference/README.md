@@ -2,6 +2,9 @@
 
 The machine-readable DEV v2 contract is available at [openapi.yaml](openapi.yaml).
 
+The hosted interactive reference is available at
+[`/reference/`](https://getnewmoney.github.io/dev-docs/reference/).
+
 ## Create mint request
 
 ```text

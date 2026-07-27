@@ -9,6 +9,7 @@ All notable partner-facing API documentation changes are recorded here.
 - Documented `pending_payment`, `processing`, `minted`, and `expired`.
 - Added the Base Sepolia request and response contract.
 - Added an OpenAPI 3.1 definition.
+- Added hosted `/docs/` and interactive `/reference/` GitHub Pages routes.
 - Replaced examples that exposed credentials in source with environment-variable examples.
 - Separated public partner documentation from private integration implementation.
 

@@ -13,6 +13,11 @@ const required = [
   'docs/concepts/payment-lifecycle.md',
   'docs/resources/errors.md',
   'reference/openapi.yaml',
+  'mkdocs.yml',
+  'requirements-docs.txt',
+  '.github/workflows/pages.yml',
+  'scripts/prepare-site.mjs',
+  'scripts/build-reference.mjs',
 ];
 
 for (const relativePath of required) {
@@ -29,7 +34,14 @@ const patterns = [
   { label: 'n8n webhook', regex: /https:\/\/[^/\s]+\/webhook\/[A-Za-z0-9_-]+/i },
 ];
 
-const ignoredDirectories = new Set(['.git', '.claude', '.codex', 'node_modules']);
+const ignoredDirectories = new Set([
+  '.git',
+  '.claude',
+  '.codex',
+  '.site',
+  '.site-source',
+  'node_modules',
+]);
 
 function scan(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
