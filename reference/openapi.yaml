@@ -52,6 +52,8 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "405":
+          $ref: "#/components/responses/MethodNotAllowed"
         "429":
           $ref: "#/components/responses/RateLimited"
         "500":
@@ -96,18 +98,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              examples:
+                missingReference:
+                  value:
+                    ok: false
+                    error: payment_reference is required
+                invalidAmount:
+                  value:
+                    ok: false
+                    error: amount must be a finite number
+                amountMismatch:
+                  value:
+                    ok: false
+                    error: Payment amount does not match mint request amount
+                    expected_amount: 5
+                    received_amount: 6
         "404":
           description: No mint request found for the payment reference
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              example:
+                ok: false
+                error: No mint request found for that payment_reference
         "409":
           description: Mint request is no longer awaiting payment
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              example:
+                ok: false
+                error: Mint request is not awaiting payment
+                request_status: minted
 components:
   schemas:
     CreateMintRequest:
@@ -308,6 +332,21 @@ components:
           type: number
         request_status:
           type: string
+        allowed:
+          type: array
+          items:
+            type: string
+        limit:
+          type: integer
+        retryAfter:
+          type: integer
+        message:
+          type: string
+        requestId:
+          type: string
+          format: uuid
+        ip:
+          type: string
       required:
         - error
   responses:
@@ -317,18 +356,56 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+          examples:
+            invalidRequest:
+              value:
+                error: Invalid request
+            invalidKeyFormat:
+              value:
+                ok: false
+                error: Invalid API key format
+            amountPrecision:
+              value:
+                ok: false
+                error: NZD amounts limited to 2 decimal places (e.g., 10.99)
     Unauthorized:
       description: Invalid API key
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+          example:
+            ok: false
+            error: Invalid API key
     Forbidden:
       description: Partner account inactive or not permitted
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+          examples:
+            inactiveAccount:
+              value:
+                ok: false
+                error: User account is not active
+            originNotAllowed:
+              value:
+                error: Origin not allowed
+            accessDenied:
+              value:
+                error: Access denied
+                ip: 203.0.113.10
+    MethodNotAllowed:
+      description: HTTP method is not supported
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            error: Method not allowed
+            allowed:
+              - POST
+              - OPTIONS
     RateLimited:
       description: Rate limit or overlapping request
       headers:
@@ -339,15 +416,36 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+          examples:
+            rateLimit:
+              value:
+                error: Rate limit exceeded
+                limit: 10
+                retryAfter: 60
+            overlappingRequest:
+              value:
+                error: Request already in progress
     ServerError:
       description: Internal processing error
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+          examples:
+            internalError:
+              value:
+                error: Internal server error
+                message: Failed to process request
+                requestId: 8d8075de-ec3a-4b4f-8d32-4866acfd36c7
+            invalidUpstream:
+              value:
+                ok: false
+                error: Invalid upstream response
     ServiceUnavailable:
       description: Service configuration unavailable
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+          example:
+            error: Service unavailable

@@ -8,6 +8,7 @@ All notable partner-facing API documentation changes are recorded here.
 - Added the payment simulator endpoint, request, response, and errors.
 - Replaced real-payment instructions with the tested DEV simulator process.
 - Updated cURL, JavaScript, Python, and OpenAPI examples for both calls.
+- Added the exact current gateway, Flow 1, and Flow 2 error messages and response fields.
 
 ## 0.2.0-dev - 2026-07-27
 
