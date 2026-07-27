@@ -1,6 +1,6 @@
 # Support
 
-Email `tech@getnewmoney.io` for:
+Email `tech@getnew.money` for:
 
 - DEV access
 - destination registration
