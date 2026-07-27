@@ -8,6 +8,16 @@ Cloudflare gateway errors may contain only `error`. Errors returned by the n8n w
 
 These messages can be returned before Flow 1 reaches n8n.
 
+The following responses were verified against the live DEV Cloudflare endpoint on 28 July 2026:
+
+- `400 Invalid request body`
+- `400 Invalid request`
+- `401 Invalid API key`
+- `403 Origin not allowed`
+- `405 Method not allowed`
+
+The `429`, `500`, and `503` responses below are part of the current Worker contract. They were not deliberately triggered during verification because doing so would consume rate limits or require a service failure.
+
 | HTTP | `error` | Meaning and action |
 | --- | --- | --- |
 | `400` | `Invalid request body` | Body is not valid JSON. Correct it before retrying. |
