@@ -9,7 +9,7 @@ if (!apiKey) {
   throw new Error('NEWMONEY_DEV_API_KEY is required');
 }
 
-const response = await fetch('https://devv2-dnzd.newmoney-api.workers.dev', {
+const flow1Response = await fetch('https://devv2-dnzd.newmoney-api.workers.dev', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -21,18 +21,39 @@ const response = await fetch('https://devv2-dnzd.newmoney-api.workers.dev', {
   }),
 });
 
-const result = await response.json();
+const mintRequest = await flow1Response.json();
 
-if (!response.ok) {
-  throw new Error(`New Money request failed (${response.status}): ${result.error}`);
+if (!flow1Response.ok) {
+  throw new Error(`Flow 1 failed (${flow1Response.status}): ${mintRequest.error}`);
+}
+
+const flow2Response = await fetch(
+  'https://toroagroup.app.n8n.cloud/webhook/dev-payment-simulator',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      payment_reference: mintRequest.payment.reference,
+      amount: mintRequest.amount,
+    }),
+  },
+);
+
+const simulation = await flow2Response.json();
+
+if (!flow2Response.ok) {
+  throw new Error(`Flow 2 failed (${flow2Response.status}): ${simulation.error}`);
 }
 
 console.log({
-  orderId: result.orderId,
-  status: result.status,
-  paymentReference: result.payment.reference,
-  expiresAt: result.payment.expires_at,
+  orderId: mintRequest.orderId,
+  requestStatus: mintRequest.status,
+  paymentReference: mintRequest.payment.reference,
+  transactionId: simulation.payment_event.transaction_id,
+  paymentEventStatus: simulation.payment_event.status,
 });
 ```
 
-Use this from a trusted backend, not browser-side code.
+Use this from a trusted backend or controlled DEV test runner, not browser-side code. A `settled` payment event does not synchronously confirm mint completion.

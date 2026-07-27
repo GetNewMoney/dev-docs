@@ -1,12 +1,12 @@
 openapi: 3.1.0
 info:
   title: New Money DNZD DEV API
-  version: 0.2.0-dev
+  version: 0.3.0-dev
   description: |
-    Creates a DNZD mint request and returns NZD bank-deposit instructions.
-    Minting is asynchronous and occurs only after payment reconciliation.
-    The current DEV contract supplies the issued API key in the JSON request
-    body. A standard header-based security scheme is planned for production.
+    The DEV integration requires two calls. Flow 1 creates a DNZD mint request.
+    Flow 2 simulates the matching Akahu payment using the exact reference and
+    amount returned by Flow 1. Reconciliation and minting then run asynchronously.
+    Do not send real money in DEV.
   contact:
     email: tech@getnew.money
   license:
@@ -18,10 +18,15 @@ servers:
 paths:
   /:
     post:
+      tags:
+        - Flow 1
       security: []
       operationId: createMintRequest
-      summary: Create a mint request
-      description: Records a pending request and returns a unique payment reference.
+      summary: Create a mint request (Flow 1)
+      description: |
+        Records a pending request and returns the unique payment reference and
+        exact amount required by Flow 2. The issued DEV API key is supplied in
+        the JSON body and must remain server-side.
       requestBody:
         required: true
         content:
@@ -36,7 +41,7 @@ paths:
                   chain: base_sepolia
       responses:
         "201":
-          description: Mint request created and awaiting NZD payment
+          description: Mint request created and awaiting the Flow 2 payment event
           content:
             application/json:
               schema:
@@ -53,6 +58,56 @@ paths:
           $ref: "#/components/responses/ServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
+  /webhook/dev-payment-simulator:
+    post:
+      tags:
+        - Flow 2
+      servers:
+        - url: https://toroagroup.app.n8n.cloud
+          description: DEV payment simulator
+      security: []
+      operationId: simulatePayment
+      summary: Simulate the matching payment (Flow 2)
+      description: |
+        Creates the simulated Akahu credit used by reconciliation. Submit the
+        exact payment reference and amount returned by Flow 1. A successful
+        response confirms payment-event creation, not synchronous mint completion.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimulatePaymentRequest"
+            examples:
+              matchingPayment:
+                value:
+                  payment_reference: MABC123XYZ
+                  amount: 10
+      responses:
+        "200":
+          description: Simulated payment event created and reconciliation triggered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulatePaymentResponse"
+        "400":
+          description: Invalid simulator request or amount mismatch
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: No mint request found for the payment reference
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Mint request is no longer awaiting payment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     CreateMintRequest:
@@ -61,7 +116,6 @@ components:
       required:
         - apiKey
         - amount
-        - chain
       properties:
         apiKey:
           type: string
@@ -76,6 +130,7 @@ components:
           description: Exact NZD amount to deposit and mint.
         chain:
           type: string
+          default: base_sepolia
           enum:
             - base_sepolia
     CreateMintRequestResponse:
@@ -131,19 +186,127 @@ components:
           type: string
         account_number:
           type: string
+          description: DEV receiving account metadata. Do not send real money in DEV.
         reference:
           type: string
           maxLength: 12
         expires_at:
           type: string
           format: date-time
+    SimulatePaymentRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - payment_reference
+        - amount
+      properties:
+        payment_reference:
+          type: string
+          minLength: 1
+          maxLength: 12
+          description: Exact payment.reference returned by Flow 1.
+        amount:
+          type: number
+          exclusiveMinimum: 0
+          description: Exact numeric amount returned by Flow 1.
+        other_account:
+          type: string
+          default: 00-0000-0000000-00
+          description: Optional simulated payer account.
+        description:
+          type: string
+          default: DEV SIMULATED PAYMENT
+          description: Optional simulator transaction description.
+    SimulatePaymentResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - ok
+        - message
+        - payment_event
+      properties:
+        ok:
+          type: boolean
+          const: true
+        message:
+          type: string
+          const: Simulated payment event created
+        payment_event:
+          $ref: "#/components/schemas/PaymentEvent"
+    PaymentEvent:
+      type: object
+      additionalProperties: false
+      required:
+        - transaction_id
+        - transaction_hash
+        - source_type
+        - order_id
+        - payment_reference
+        - amount
+        - currency
+        - receiving_account
+        - other_account
+        - transaction_date
+        - status
+        - description
+        - user_name
+        - user_email
+        - brale_address_id
+        - chain
+      properties:
+        transaction_id:
+          type: string
+        transaction_hash:
+          type: string
+        source_type:
+          type: string
+          const: dev_simulator
+        order_id:
+          type: string
+        payment_reference:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+          const: NZD
+        receiving_account:
+          type: string
+        other_account:
+          type: string
+        transaction_date:
+          type: string
+          format: date-time
+        status:
+          type: string
+          const: settled
+        description:
+          type: string
+        user_name:
+          type: string
+        user_email:
+          type:
+            - string
+            - "null"
+        brale_address_id:
+          type: string
+        chain:
+          type: string
+          const: base_sepolia
     Error:
       type: object
+      additionalProperties: true
       properties:
         ok:
           type: boolean
           const: false
         error:
+          type: string
+        expected_amount:
+          type: number
+        received_amount:
+          type: number
+        request_status:
           type: string
       required:
         - error

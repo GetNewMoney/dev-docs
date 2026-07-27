@@ -1,26 +1,28 @@
 # Documentation
 
-New Money's DEV API lets an approved partner request a dNZD mint after depositing the matching amount of NZD.
+New Money's DEV API lets an approved partner test the complete DNZD mint lifecycle without sending a real bank payment.
 
-The integration is asynchronous:
+## Required two-step test
 
-1. Your backend creates a mint request.
-2. New Money returns a unique bank reference and deposit instructions.
-3. The NZD deposit is received and reconciled.
-4. New Money initiates the dNZD transfer to your registered Base Sepolia destination.
+1. Your backend calls Flow 1 to create a mint request.
+2. Flow 1 returns `orderId`, the expected amount, and a unique `payment.reference`.
+3. Your test runner calls Flow 2 with that exact reference and amount.
+4. Flow 2 creates a simulated Akahu credit transaction.
+5. Reconciliation claims the transaction and initiates the dNZD transfer to the registered Base Sepolia destination.
 
-Creating the request alone does not prove payment and does not mint tokens.
+Flow 1 alone leaves the request at `pending_payment`. A successful Flow 2 response confirms that the simulated payment event was created, not that minting has already completed.
 
 ## What is available
 
 | Capability | DEV status |
 | --- | --- |
-| Create mint request | Available |
-| Unique payment reference | Available |
-| NZD deposit reconciliation | Available |
+| Create mint request | Available through Flow 1 |
+| Simulate matching payment | Available through Flow 2 |
+| Reconciliation | Triggered automatically after Flow 2 |
 | Base Sepolia dNZD transfer | Available |
 | Public request-status endpoint | Not yet available |
-| Partner webhooks | Not yet available |
+| Partner completion webhooks | Not yet available |
+| Real Akahu bank collection | Replaced by Flow 2 in DEV |
 | Mainnet transfer | Not available in DEV |
 
 ## Recommended reading
@@ -29,4 +31,5 @@ Creating the request alone does not prove payment and does not mint tokens.
 2. [Authentication](authentication.md)
 3. [Mint requests](concepts/mint-requests.md)
 4. [Payment lifecycle](concepts/payment-lifecycle.md)
-5. [Errors](resources/errors.md)
+5. [Testing](testing.md)
+6. [Errors](resources/errors.md)

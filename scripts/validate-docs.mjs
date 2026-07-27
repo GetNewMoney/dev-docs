@@ -31,8 +31,12 @@ const patterns = [
   { label: 'GitHub token', regex: /\bgh[opusr]_[A-Za-z0-9_]{20,}\b/ },
   { label: 'DNZD API key', regex: /\bdnzd_(?:test|live)_[A-Za-z0-9_-]{20,}\b/ },
   { label: 'Basic credential', regex: /Authorization["':\s]+Basic\s+[A-Za-z0-9+/=]{24,}/i },
-  { label: 'n8n webhook', regex: /https:\/\/[^/\s]+\/webhook\/[A-Za-z0-9_-]+/i },
 ];
+
+const allowedPublicWebhooks = new Set([
+  'https://toroagroup.app.n8n.cloud/webhook/dev-payment-simulator',
+]);
+const webhookPattern = /https:\/\/[^/\s"'`)]+\/webhook\/[A-Za-z0-9_-]+/gi;
 
 const ignoredDirectories = new Set([
   '.git',
@@ -57,6 +61,14 @@ function scan(directory) {
     for (const pattern of patterns) {
       if (pattern.regex.test(content)) {
         errors.push(`${path.relative(root, absolute)}: possible ${pattern.label}`);
+      }
+    }
+
+    for (const match of content.matchAll(webhookPattern)) {
+      if (!allowedPublicWebhooks.has(match[0])) {
+        errors.push(
+          `${path.relative(root, absolute)}: unapproved n8n webhook ${match[0]}`
+        );
       }
     }
 

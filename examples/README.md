@@ -1,6 +1,6 @@
 # Examples
 
-All examples read the API key from `NEWMONEY_DEV_API_KEY`.
+All examples run Flow 1 and then Flow 2. They read the Flow 1 API key from `NEWMONEY_DEV_API_KEY` and pass its returned reference and amount directly to Flow 2.
 
 | Language | Example |
 | --- | --- |
@@ -8,4 +8,4 @@ All examples read the API key from `NEWMONEY_DEV_API_KEY`.
 | JavaScript | [javascript.md](javascript.md) |
 | Python | [python.md](python.md) |
 
-These examples create a request only. They do not wait for bank reconciliation or claim that minting completed synchronously.
+The examples confirm that the simulated payment event was created. They do not claim that the asynchronous Brale transfer has completed.
