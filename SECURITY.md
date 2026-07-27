@@ -11,8 +11,8 @@ Never:
 - paste an API key into an issue, screenshot, log, or support ticket
 - share one key between unrelated environments
 
-If a key may have been exposed, contact `tech@getnewmoney.io` and request rotation.
+If a key may have been exposed, contact `tech@getnew.money` and request rotation.
 
 ## Reporting vulnerabilities
 
-Do not open a public GitHub issue for a vulnerability. Email `tech@getnewmoney.io` with the affected endpoint, a concise reproduction using synthetic data, and the potential impact.
+Do not open a public GitHub issue for a vulnerability. Email `tech@getnew.money` with the affected endpoint, a concise reproduction using synthetic data, and the potential impact.

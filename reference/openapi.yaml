@@ -8,7 +8,7 @@ info:
     The current DEV contract supplies the issued API key in the JSON request
     body. A standard header-based security scheme is planned for production.
   contact:
-    email: tech@getnewmoney.io
+    email: tech@getnew.money
   license:
     name: Proprietary
     identifier: LicenseRef-Proprietary

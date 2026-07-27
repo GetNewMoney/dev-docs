@@ -2,7 +2,7 @@
 
 ## 1. Request DEV access
 
-Email `tech@getnewmoney.io` with:
+Email `tech@getnew.money` with:
 
 - company name
 - technical contact
