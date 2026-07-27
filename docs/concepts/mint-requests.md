@@ -1,34 +1,46 @@
 # Mint requests
 
-A mint request records an intent to exchange an exact NZD deposit for dNZD on the partner's registered destination.
+A mint request records the exact amount and registered destination for a future dNZD transfer.
 
-## Request fields
+## Flow 1 fields
 
 | Field | Type | Required | DEV behavior |
 | --- | --- | --- | --- |
 | `apiKey` | string | Yes | Issued DEV credential |
-| `amount` | number | Yes | NZD amount, greater than or equal to `0.01`, maximum two decimal places |
-| `chain` | string | Yes | `base_sepolia` |
+| `amount` | number | Yes | NZD amount, at least `0.01`, maximum two decimal places |
+| `chain` | string | No | Defaults to `base_sepolia`; use it explicitly in partner integrations |
 
 The partner's per-transaction and daily limits may be lower than the platform maximum.
 
-## Returned identifiers
+## Values to retain
 
-Store:
+Flow 1 returns:
 
-- `orderId` as your New Money request identifier
-- `payment.reference` for bank reconciliation
-- `payment.expires_at` to prevent payment after the request window
+- `orderId`, the New Money request identifier
+- `amount`, the exact value Flow 2 must submit
+- `payment.reference`, the exact value Flow 2 must submit as `payment_reference`
+- `payment.expires_at`, the request payment window
 
-Do not generate or modify the payment reference.
+Do not generate, alter, normalize, or reuse a payment reference.
 
-## Deposit requirements
+## Flow 2 fields
 
-Automatic reconciliation requires:
+| Field | Type | Required | DEV behavior |
+| --- | --- | --- | --- |
+| `payment_reference` | string | Yes | Exact `payment.reference` from Flow 1 |
+| `amount` | number | Yes | Exact numeric amount from Flow 1 |
+| `other_account` | string | No | Defaults to `00-0000-0000000-00` |
+| `description` | string | No | Defaults to `DEV SIMULATED PAYMENT` |
+
+Flow 2 rejects an unknown reference, a different amount, or a request that is no longer `pending_payment`.
+
+## Reconciliation requirements
+
+The scheduler matches:
 
 - exact payment reference
 - exact amount
-- incoming credit transaction
-- transaction received before the request expires
+- a credit transaction
+- a unique transaction ID
 
-No match leaves the request pending. Multiple exact matches require review and are not automatically minted.
+No match leaves the request pending. Multiple exact matches are skipped rather than minted automatically.

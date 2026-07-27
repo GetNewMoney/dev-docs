@@ -1,6 +1,6 @@
 # Authentication
 
-Each approved DEV partner receives an API key. The current DEV v2 request contract sends it in the JSON `apiKey` field.
+Each approved DEV partner receives an API key. Flow 1 sends it in the JSON `apiKey` field.
 
 ```json
 {
@@ -34,3 +34,5 @@ const apiKey = "hard-coded-key";
 - Never log the complete request body when it includes `apiKey`.
 
 The service stores a one-way SHA-256 hash for lookup; the plaintext key should remain only with the partner and approved secret-management systems.
+
+Flow 2 does not accept the API key. It accepts only the `payment_reference` and amount created by Flow 1. Never add the API key to the Flow 2 payload.
