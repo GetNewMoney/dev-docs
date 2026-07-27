@@ -11,6 +11,10 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+.claude/
+.codex/
+.site/
+.site-source/
 *.swp
 *.swo
 *~

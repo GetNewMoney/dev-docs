@@ -1,94 +1,18 @@
 # Changelog
 
-All notable changes to the New Money API will be documented in this file.
+All notable partner-facing API documentation changes are recorded here.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## 0.2.0-dev - 2026-07-27
 
----
+- Replaced the retired immediate-mint contract with the DEV v2 mint-request lifecycle.
+- Updated the DEV endpoint to `devv2-dnzd.newmoney-api.workers.dev`.
+- Documented `pending_payment`, `processing`, `minted`, and `expired`.
+- Added the Base Sepolia request and response contract.
+- Added an OpenAPI 3.1 definition.
+- Added hosted `/docs/` and interactive `/reference/` GitHub Pages routes.
+- Replaced examples that exposed credentials in source with environment-variable examples.
+- Separated public partner documentation from private integration implementation.
 
-## [Unreleased]
+## 0.1.0-dev - 2025-12
 
-### Coming Soon
-- Real-time bank integration for fiat deposit verification
-- Additional blockchain network support (Ethereum, Polygon, Base, Optimism, Arbitrum, Celo, Stellar, Solana, Avalanche, BNB Chain)
-- Official JavaScript and Python SDKs
-
----
-
-## [0.1.0-beta] - 2025-12-01
-
-### Added
-- Initial beta release of the New Money Minting API
-- Core minting endpoint (`POST /`)
-- API key authentication with SHA256 hashing
-- Prepaid balance system for transaction management
-- Rate limiting (10 requests per minute per IP)
-- Request validation and input sanitization
-- Support for Sepolia testnet
-- Comprehensive error responses with detailed messages
-- Developer documentation and code examples
-
-### Security
-- DDoS protection via edge network
-- Request validation (type checking, format validation)
-- Balance enforcement (prepaid system)
-- Transaction limits (per-transaction and daily)
-- Chain validation (whitelist approach)
-- API key format validation
-
-### Networks
-- Sepolia (Ethereum testnet) - **Available**
-
-### Tokens
-- dNZD1 (NZD-backed stablecoin) - **Available**
-
----
-
-## Versioning Policy
-
-### Semantic Versioning
-
-We use semantic versioning (MAJOR.MINOR.PATCH):
-
-- **MAJOR**: Breaking changes that require code updates
-- **MINOR**: New features, backward compatible
-- **PATCH**: Bug fixes, backward compatible
-
-### Beta Period
-
-During the beta period (0.x.x versions):
-
-- API may have breaking changes without major version bump
-- 7-day notice will be provided for significant changes
-- All registered users will be notified via email
-
-### Deprecation Policy
-
-When we deprecate features:
-
-1. **Announcement**: Posted in changelog and documentation
-2. **Notice Period**: Minimum 30 days before removal
-3. **Migration Guide**: Provided for all breaking changes
-4. **Support**: Available via [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
-
----
-
-## Migration Guides
-
-*No migrations required yet. This section will be updated when breaking changes are introduced.*
-
----
-
-## Feedback
-
-We appreciate your feedback during the beta period:
-
-- **Feature Requests**: [GitHub Issues](https://github.com/GetNewMoney/dev-docs/issues)
-- **Bug Reports**: [GitHub Issues](https://github.com/GetNewMoney/dev-docs/issues)
-- **General Feedback**: [tech@getnewmoney.io](mailto:tech@getnewmoney.io)
-
----
-
-[Unreleased]: https://github.com/GetNewMoney/dev-docs/compare/v0.1.0-beta...HEAD
-[0.1.0-beta]: https://github.com/GetNewMoney/dev-docs/releases/tag/v0.1.0-beta
+- Initial developer documentation.
